@@ -3,10 +3,14 @@
 ### WE'RE GOING TO HAVE TO START LIKE IT WAS IN THE BEGINNING.
 
 
-offense_team <- which(ppp_final_df$Team == "Chattanooga" & ppp_final_df$season == 2025)[1]
-defense_team <- which(ppp_final_df$Opp == "UC Irvine" & ppp_final_df$season == 2025)[1]
+off_string = "Boise State"
+def_string = "Nebraska"
 
-prediction_df <- cbind(ppp_final_df[offense_team,c(21:137)], ppp_final_df[defense_team,c(138:254)], ppp_final_df[offense_team,c(255:332)], ppp_final_df[defense_team,c(333:410)], ppp_final_df[offense_team,c(411:416)], ppp_final_df[defense_team,c(417:422)])
+
+offense_team <- which(ppp_final_df$Team == off_string & ppp_final_df$season == 2025)[1]
+defense_team <- which(ppp_final_df$Opp == def_string & ppp_final_df$season == 2025)[1]
+
+prediction_df <- cbind(ppp_final_df[offense_team,c(21:137)], ppp_final_df[defense_team,c(138:254)], ppp_final_df[offense_team,c(255:332)], ppp_final_df[defense_team,c(333:410)], ppp_final_df[offense_team,c(411:416)], ppp_final_df[defense_team,c(417:423)])
 
 prediction_df$FC_height_diff <- prediction_df$off_FC_height - prediction_df$def_FC_height
 prediction_df$G_height_diff <- prediction_df$off_G_height - prediction_df$def_G_height
@@ -18,8 +22,10 @@ prediction_df$FC_class_diff <- prediction_df$off_FC_class - prediction_df$def_FC
 prediction_df$G_class_diff <- prediction_df$off_G_class - prediction_df$def_G_class
 
 prediction_df$LocationInd = -.89
-prediction_df$ConferenceInd = -1.3375509
+prediction_df$ConferenceInd = -1.33
 prediction_df$away_b2b_ind = 2.59
+
+colnames(prediction_df) <- gsub("%", "", colnames(prediction_df))
 
 
 
@@ -164,19 +170,19 @@ grouped_ppp_summary_off <- function(team_offense, opponent_defense, ssn, locind,
 
 
 
-team_comparison_ppp_off("Chattanooga", "UC Irvine", 2025, "A", "N", "N")
+team_comparison_ppp_off(off_string, def_string, 2025, "A", "N", "N")
 
-predict_weighted_ppp_off("Chattanooga", "UC Irvine", 2025, "A", "N", "Y")
+predict_weighted_ppp_off(off_string, def_string, 2025, "A", "N", "N")
 
-grouped_ppp_summary_off("Chattanooga", "UC Irvine", 2025, "A", "N", "Y")
+grouped_ppp_summary_off(off_string, def_string, 2025, "A", "N", "N")
 
 
 
-team_comparison_ppp_off("UC Irvine", "Chattanooga", 2025, "A", "N", "N")
+team_comparison_ppp_off(def_string, off_string, 2025, "A", "N", "N")
 
-predict_weighted_ppp_off("UC Irvine", "Chattanooga", 2025, "A", "N", "Y")
+predict_weighted_ppp_off(def_string, off_string, 2025, "A", "N", "N")
 
-grouped_ppp_summary_off("UC Irvine", "Chattanooga", 2025, "A", "N", "Y")
+grouped_ppp_summary_off(def_string, off_string, 2025, "A", "N", "N")
 
 
 
@@ -328,16 +334,16 @@ grouped_ppp_summary_def <- function(team_defense, opponent_offense, ssn, locind,
 
 
 
-team_comparison_ppp_def("Chattanooga", "UC Irvine", 2025, "A", "N", "N")
+team_comparison_ppp_def(off_string, def_string, 2025, "A", "N", "N")
 
-team_comparison_ppp_def("UC Irvine", "Chattanooga", 2025, "A", "N", "N")
-
-
-predict_weighted_ppp_def("Chattanooga", "UC Irvine", 2025, "A", "N", "Y")
-
-predict_weighted_ppp_def("UC Irvine", "Chattanooga", 2025, "A", "N", "Y")
+team_comparison_ppp_def(def_string, off_string, 2025, "A", "N", "N")
 
 
-grouped_ppp_summary_def("Chattanooga", "UC Irvine", 2025, "A", "N", "Y")
+predict_weighted_ppp_def(off_string, def_string, 2025, "A", "N", "N")
 
-grouped_ppp_summary_def("UC Irvine", "Chattanooga", 2025, "A", "N", "Y")
+predict_weighted_ppp_def(def_string, off_string, 2025, "A", "N", "N")
+
+
+grouped_ppp_summary_def(off_string, def_string, 2025, "A", "N", "N")
+
+grouped_ppp_summary_def(def_string, off_string, 2025, "A", "N", "N")

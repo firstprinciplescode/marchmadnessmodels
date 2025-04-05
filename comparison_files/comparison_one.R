@@ -37,9 +37,17 @@ ppp_final_df <- inner_join(final_df, ppp_df, by = c("Team", "Opp", "game_id"))
 colnames(ppp_final_df) <- gsub("%", "", colnames(ppp_final_df))
 
 
+##
+##
+##
 
-offense_team <- which(ppp_final_df$Team == "Chattanooga" & ppp_final_df$season == 2025)[1]
-defense_team <- which(ppp_final_df$Opp == "UC Irvine" & ppp_final_df$season == 2025)[1]
+
+off_string = "Boise State"
+def_string = "Nebraska"
+
+
+offense_team <- which(ppp_final_df$Team == off_string & ppp_final_df$season == 2025)[1]
+defense_team <- which(ppp_final_df$Opp == def_string & ppp_final_df$season == 2025)[1]
 
 prediction_df <- cbind(ppp_final_df[offense_team,c(21:137)], ppp_final_df[defense_team,c(138:254)], ppp_final_df[offense_team,c(255:332)], ppp_final_df[defense_team,c(333:410)], ppp_final_df[offense_team,c(411:416)], ppp_final_df[defense_team,c(417:423)])
 
@@ -112,7 +120,7 @@ output1 %>% dplyr::summarise(PPP = mean(PPP, na.rm = T),
                              def_conf_away_perc_PPP  = mean(def_conf_away_perc_PPP , na.rm = T),
                              def_non_conf_away_perc_PPP  = mean(def_non_conf_away_perc_PPP , na.rm = T))
 
-output1 %>% filter((Team != "Chattanooga" | Opp != "UC Irvine") & season != 2025) %>% 
+output1 %>% filter((Team != off_string | Opp != def_string) & season != 2025) %>% 
   dplyr::summarise(PPP = mean(PPP, na.rm = T),
                    off_away_perc_PPP = mean(off_away_perc_PPP, na.rm = T),
                    off_conf_away_perc_PPP  = mean(off_conf_away_perc_PPP , na.rm = T),
@@ -131,7 +139,7 @@ output2 %>% dplyr::summarise(PPP = mean(PPP, na.rm = T),
                              def_conf_home_perc_PPP  = mean(def_conf_home_perc_PPP , na.rm = T),
                              def_non_conf_home_perc_PPP  = mean(def_non_conf_home_perc_PPP , na.rm = T))
 
-output2 %>% filter((Team != "Chattanooga" | Opp != "UC Irvine") & season != 2025) %>% 
+output2 %>% filter((Team != off_string | Opp != def_string) & season != 2025) %>% 
   dplyr::summarise(PPP = mean(PPP, na.rm = T),
                    off_home_perc_PPP = mean(off_home_perc_PPP, na.rm = T),
                    off_conf_home_perc_PPP  = mean(off_conf_home_perc_PPP , na.rm = T),

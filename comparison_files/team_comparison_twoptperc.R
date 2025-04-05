@@ -133,19 +133,19 @@ grouped_twoptperc_summary_off <- function(team_offense, opponent_defense, ssn, l
 }
 
 
-team_comparison_twoptperc_off("UC Irvine", "Chattanooga", 2025, "A", "N", 'N')
+team_comparison_twoptperc_off(off_string, def_string, 2025, "A", "N", "N")
 
-team_comparison_twoptperc_off("Chattanooga", "UC Irvine", 2025, "A", "N", 'N')
-
-
-predict_weighted_twoptperc_off("Chattanooga", "UC Irvine", 2025, "A", "N", 'Y')
-
-predict_weighted_twoptperc_off("UC Irvine", "Chattanooga", 2025, "A", "N", 'Y')
+team_comparison_twoptperc_off(def_string, off_string, 2025, "A", "N", "N")
 
 
-grouped_twoptperc_summary_off("Chattanooga", "UC Irvine", 2025, "A", "N", 'Y')
+predict_weighted_twoptperc_off(off_string, def_string, 2025, "A", "N", "N")
 
-grouped_twoptperc_summary_off("UC Irvine", "Chattanooga", 2025, "A", "N", 'Y')
+predict_weighted_twoptperc_off(def_string, off_string, 2025, "A", "N", "N")
+
+
+grouped_twoptperc_summary_off(off_string, def_string, 2025, "A", "N", "N")
+
+grouped_twoptperc_summary_off(def_string, off_string, 2025, "A", "N", "N")
 
 
 
@@ -287,16 +287,16 @@ grouped_twopt_summary_def <- function(team_defense, opponent_offense, ssn, locin
 
 
 
-team_comparison_twopt_def("UC Irvine", "Chattanooga", 2025, "A", "N", 'N')
+team_comparison_twopt_def(off_string, def_string, 2025, "A", "N", "N")
 
-team_comparison_twopt_def("Chattanooga", "UC Irvine", 2025, "A", "N", 'N')
-
-
-predict_weighted_twopt_def("Chattanooga", "UC Irvine", 2025, "A", "N", 'Y')
-
-predict_weighted_twopt_def("UC Irvine", "Chattanooga", 2025, "A", "N", 'Y')
+team_comparison_twopt_def(def_string, off_string, 2025, "A", "N", "N")
 
 
-grouped_twopt_summary_def("Chattanooga", "UC Irvine", 2025, "A", "N", 'Y')
+predict_weighted_twopt_def(off_string, def_string, 2025, "A", "N", "N")
 
-grouped_twopt_summary_def("UC Irvine", "Chattanooga", 2025, "A", "N", 'Y')
+predict_weighted_twopt_def(def_string, off_string, 2025, "A", "N", "N")
+
+
+grouped_twopt_summary_def(off_string, def_string, 2025, "A", "N", "N")
+
+grouped_twopt_summary_def(def_string, off_string, 2025, "A", "N", "N")

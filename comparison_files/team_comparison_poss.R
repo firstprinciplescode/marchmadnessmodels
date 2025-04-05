@@ -135,19 +135,19 @@ grouped_poss_summary_off <- function(team_offense, opponent_defense, ssn, locind
 
 
 
-team_comparison_poss_off("UC Irvine", "Chattanooga", 2025, "A", "N", 'N')
+team_comparison_poss_off(off_string, def_string, 2025, "A", "N", "N")
 
-team_comparison_poss_off("Chattanooga", "UC Irvine", 2025, "A", "N", 'N')
-
-
-predict_weighted_poss_off("Chattanooga", "UC Irvine", 2025, "A", "N", 'Y')
-
-predict_weighted_poss_off("UC Irvine", "Chattanooga", 2025, "A", "N", 'Y')
+team_comparison_poss_off(def_string, off_string, 2025, "A", "N", "N")
 
 
-grouped_poss_summary_off("Chattanooga", "UC Irvine", 2025, "A", "N", 'Y')
+predict_weighted_poss_off(off_string, def_string, 2025, "A", "N", "N")
 
-grouped_poss_summary_off("UC Irvine", "Chattanooga", 2025, "A", "N", 'Y')
+predict_weighted_poss_off(def_string, off_string, 2025, "A", "N", "N")
+
+
+grouped_poss_summary_off(off_string, def_string, 2025, "A", "N", "N")
+
+grouped_poss_summary_off(def_string, off_string, 2025, "A", "N", "N")
 
 
 
@@ -289,17 +289,17 @@ grouped_poss_summary_def <- function(team_defense, opponent_offense, ssn, locind
 
 
 
-team_comparison_poss_def("UC Irvine", "Chattanooga", 2025, "A", "N", 'N')
+team_comparison_poss_def(off_string, def_string, 2025, "A", "N", "N")
 
-team_comparison_poss_def("Chattanooga", "UC Irvine", 2025, "A", "N", 'N')
-
-
-predict_weighted_poss_def("Chattanooga", "UC Irvine", 2025, "A", "N", 'Y')
-
-predict_weighted_poss_def("UC Irvine", "Chattanooga", 2025, "A", "N", 'Y')
+team_comparison_poss_def(def_string, off_string, 2025, "A", "N", "N")
 
 
-grouped_poss_summary_def("Chattanooga", "UC Irvine", 2025, "A", "N", 'Y')
+predict_weighted_poss_def(off_string, def_string, 2025, "A", "N", "N")
 
-grouped_poss_summary_def("UC Irvine", "Chattanooga", 2025, "A", "N", 'Y')
+predict_weighted_poss_def(def_string, off_string, 2025, "A", "N", "N")
+
+
+grouped_poss_summary_def(off_string, def_string, 2025, "A", "N", "N")
+
+grouped_poss_summary_def(def_string, off_string, 2025, "A", "N", "N")
 

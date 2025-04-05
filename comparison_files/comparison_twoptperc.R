@@ -14,10 +14,14 @@ colnames(twoptperc_df) <- gsub("%", "", colnames(twoptperc_df))
 ###
 
 
-offense_team <- which(twoptperc_df$Team == "Chattanooga" & twoptperc_df$season == 2025)[1]
-defense_team <- which(twoptperc_df$Opp == "UC Irvine" & twoptperc_df$season == 2025)[1]
+off_string = "Boise State"
+def_string = "Nebraska"
 
-prediction_df <- cbind(twoptperc_df[offense_team,c(21:137)], twoptperc_df[defense_team,c(138:254)], twoptperc_df[offense_team,c(255:332)], twoptperc_df[defense_team,c(333:410)], twoptperc_df[offense_team,c(411:416)], twoptperc_df[defense_team,c(417:423)])
+
+offense_team <- which(ppp_final_df$Team == off_string & ppp_final_df$season == 2025)[1]
+defense_team <- which(ppp_final_df$Opp == def_string & ppp_final_df$season == 2025)[1]
+
+prediction_df <- cbind(ppp_final_df[offense_team,c(21:137)], ppp_final_df[defense_team,c(138:254)], ppp_final_df[offense_team,c(255:332)], ppp_final_df[defense_team,c(333:410)], ppp_final_df[offense_team,c(411:416)], ppp_final_df[defense_team,c(417:423)])
 
 prediction_df$FC_height_diff <- prediction_df$off_FC_height - prediction_df$def_FC_height
 prediction_df$G_height_diff <- prediction_df$off_G_height - prediction_df$def_G_height
@@ -94,7 +98,7 @@ output1_twopt %>% dplyr::summarise(`2Pperc` = mean(`2Pperc`, na.rm = T),
                                    def_conf_away_perc_2Pperc  = mean(def_conf_away_perc_2Pperc , na.rm = T),
                                    def_non_conf_away_perc_2Pperc  = mean(def_non_conf_away_perc_2Pperc , na.rm = T))
 
-output1_twopt %>% filter((Team != "Chattanooga" | Opp != "UC Irvine") & season != 2025) %>% 
+output1_twopt %>% filter((Team != off_string | Opp != def_string) & season != 2025) %>% 
   dplyr::summarise(`2Pperc` = mean(`2Pperc`, na.rm = T),
                    off_away_perc_2Pperc = mean(off_away_perc_2Pperc, na.rm = T),
                    off_conf_away_perc_2Pperc = mean(off_conf_away_perc_2Pperc, na.rm = T),
@@ -115,7 +119,7 @@ output2_twopt %>% dplyr::summarise(`2Pperc` = mean(`2Pperc`, na.rm = T),
                                    def_non_conf_home_perc_2Pperc  = mean(def_non_conf_home_perc_2Pperc , na.rm = T))
 
 output2_twopt %>% 
-  filter((Team != "Chattanooga" | Opp != "UC Irvine") & season != 2025) %>% 
+  filter((Team != off_string | Opp != def_string) & season != 2025) %>% 
   dplyr::summarise(`2Pperc` = mean(`2Pperc`, na.rm = T),
                    off_home_perc_2Pperc = mean(off_home_perc_2Pperc, na.rm = T),
                    off_conf_home_perc_2Pperc = mean(off_conf_home_perc_2Pperc, na.rm = T),
