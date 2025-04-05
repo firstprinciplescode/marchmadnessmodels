@@ -14,8 +14,8 @@ colnames(threeptperc_df) <- gsub("%", "", colnames(threeptperc_df))
 ###
 
 
-off_string = "Chattanooga"
-def_string = "UC Irvine"
+off_string = "Nebraska"
+def_string = "Boise State"
 
 offense_team <- which(threeptperc_df$Team == off_string & threeptperc_df$season == 2025)[1]
 defense_team <- which(threeptperc_df$Opp == def_string & threeptperc_df$season == 2025)[1]
@@ -33,7 +33,7 @@ prediction_df$G_class_diff <- prediction_df$off_G_class - prediction_df$def_G_cl
 
 prediction_df$LocationInd = -.89
 prediction_df$ConferenceInd = -1.33
-prediction_df$away_b2b_ind = 2.59
+prediction_df$away_b2b_ind = -.386
 
 colnames(prediction_df) <- gsub("%", "", colnames(prediction_df))
 
@@ -42,8 +42,8 @@ predict(xgb_threeptperc_route, as.matrix(prediction_df))
 
 
 
-comparison_threeptperc_func <- function(threshold, year = NULL, locationinput = NULL) {
-  current_game_vector <- prediction_df
+comparison_threeptperc_func <- function(func_pred_df, threshold, year = NULL, locationinput = NULL) {
+  current_game_vector <- func_pred_df
   reference_df <- cbind(
     threeptperc_df %>% select(Team, Opp, season, Date, Location, `3P`, `off_home_perc_3P`:`def_non_conf_away_perc_3P`),
     threeptperc_df[, which(colnames(threeptperc_df) %in% importance_matrix_threeptperc$Feature)]
@@ -84,12 +84,8 @@ comparison_threeptperc_func <- function(threshold, year = NULL, locationinput = 
 }
 
 
-output1_threept <- comparison_threeptperc_func(.41, year = NULL, locationinput = "A")
-output2_threept <- comparison_threeptperc_func(.77, year = NULL, locationinput = "H")
-
-nrow(output1_threept)
-nrow(output2_threept)
-
+output1_threept <- comparison_threeptperc_func(prediction_df, .41, year = NULL, locationinput = "A")
+output2_threept <- comparison_threeptperc_func(prediction_df_2, .77, year = NULL, locationinput = "H")
 
 output1_threept %>% dplyr::summarise(threePperc = mean(`3P`, na.rm = T),
                                      off_away_perc_3P = mean(off_away_perc_3P, na.rm = T),

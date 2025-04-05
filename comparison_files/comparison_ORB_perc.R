@@ -41,8 +41,8 @@ colnames(prediction_df) <- gsub("%", "", colnames(prediction_df))
 predict(xgb_ORB_perc_route, as.matrix(prediction_df))
 
 
-comparison_ORB_perc_func <- function(threshold, year = NULL, locationinput = NULL) {
-  current_game_vector <- prediction_df
+comparison_ORB_perc_func <- function(func_pred_df, threshold, year = NULL, locationinput = NULL) {
+  current_game_vector <- func_pred_df
   reference_df <- cbind(
     ORB_perc_df %>% select(Team, Opp, season, Date, Location, ORB_perc, off_home_perc_ORB_perc:def_non_conf_away_perc_ORB_perc),
     ORB_perc_df[, which(colnames(ORB_perc_df) %in% importance_matrix_ORB_perc$Feature)]
@@ -85,10 +85,6 @@ comparison_ORB_perc_func <- function(threshold, year = NULL, locationinput = NUL
 
 output1_ORB_perc <- comparison_ORB_perc_func(.53, year = NULL, locationinput = "A")
 output2_ORB_perc <- comparison_ORB_perc_func(.64, year = NULL, locationinput = "H")
-
-nrow(output1_ORB_perc)
-nrow(output2_ORB_perc)
-
 
 output1_ORB_perc %>% dplyr::summarise(ORB_perc = mean(ORB_perc, na.rm = T),
                                       off_away_perc_ORB_perc = mean(off_away_perc_ORB_perc, na.rm = T),

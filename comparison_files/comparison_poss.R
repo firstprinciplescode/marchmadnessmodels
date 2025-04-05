@@ -42,8 +42,8 @@ colnames(poss_final_df) <- gsub("%", "", colnames(poss_final_df))
 ###
 
 
-off_string = "Boise State"
-def_string = "Nebraska"
+off_string = "Duke"
+def_string = "Houston"
 
 
 offense_team <- which(ppp_final_df$Team == off_string & ppp_final_df$season == 2025)[1]
@@ -62,7 +62,7 @@ prediction_df$G_class_diff <- prediction_df$off_G_class - prediction_df$def_G_cl
 
 prediction_df$LocationInd = -.89
 prediction_df$ConferenceInd = -1.33
-prediction_df$away_b2b_ind = 2.59
+prediction_df$away_b2b_ind = -.386
 
 colnames(prediction_df) <- gsub("%", "", colnames(prediction_df))
 
@@ -70,8 +70,8 @@ colnames(prediction_df) <- gsub("%", "", colnames(prediction_df))
 predict(xgb_poss_route, as.matrix(prediction_df))
 
 
-comparison_poss_func <- function(threshold, year = NULL, locationinput = NULL) {
-  current_game_vector <- prediction_df
+comparison_poss_func <- function(func_pred_df, threshold, year = NULL, locationinput = NULL) {
+  current_game_vector <- func_pred_df
   reference_df <- cbind(
     poss_final_df %>% select(Team, Opp, season, Date, Location, poss, off_home_perc_poss:def_non_conf_away_perc_poss),
     poss_final_df[, which(colnames(poss_final_df) %in% importance_matrix_poss$Feature)]
@@ -112,8 +112,8 @@ comparison_poss_func <- function(threshold, year = NULL, locationinput = NULL) {
 }
 
 
-output1 <- comparison_poss_func(.43, year = NULL, locationinput = "A")
-output2 <- comparison_poss_func(.53, year = NULL, locationinput = "H")
+output1 <- comparison_poss_func(.38, year = NULL, locationinput = "A")
+output2 <- comparison_poss_func(.48, year = NULL, locationinput = "H")
 
 nrow(output1)
 nrow(output2)

@@ -41,8 +41,8 @@ colnames(prediction_df) <- gsub("%", "", colnames(prediction_df))
 predict(xgb_TOV_perc_route, as.matrix(prediction_df))
 
 
-comparison_tov_perc_func <- function(threshold, year = NULL, locationinput = NULL) {
-  current_game_vector <- prediction_df
+comparison_tov_perc_func <- function(func_pred_df, threshold, year = NULL, locationinput = NULL) {
+  current_game_vector <- func_pred_df
   reference_df <- cbind(
     TOV_perc_df %>% select(Team, Opp, season, Date, Location, TOV_perc, off_home_perc_TOV_perc:def_non_conf_away_perc_TOV_perc),
     TOV_perc_df[, which(colnames(TOV_perc_df) %in% importance_matrix_TOV_perc$Feature)]
@@ -85,10 +85,6 @@ comparison_tov_perc_func <- function(threshold, year = NULL, locationinput = NUL
 
 output1_tov_perc <- comparison_tov_perc_func(.32, year = NULL, locationinput = "A")
 output2_tov_perc <- comparison_tov_perc_func(.49, year = NULL, locationinput = "H")
-
-nrow(output1_tov_perc)
-nrow(output2_tov_perc)
-
 
 output1_tov_perc %>% dplyr::summarise(TOV_perc = mean(TOV_perc, na.rm = T),
                                       off_away_perc_TOV_perc = mean(off_away_perc_TOV_perc, na.rm = T),

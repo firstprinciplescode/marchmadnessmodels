@@ -42,8 +42,8 @@ colnames(ppp_final_df) <- gsub("%", "", colnames(ppp_final_df))
 ##
 
 
-off_string = "Boise State"
-def_string = "Nebraska"
+off_string = "Florida"
+def_string = "Auburn"
 
 
 offense_team <- which(ppp_final_df$Team == off_string & ppp_final_df$season == 2025)[1]
@@ -61,16 +61,16 @@ prediction_df$FC_class_diff <- prediction_df$off_FC_class - prediction_df$def_FC
 prediction_df$G_class_diff <- prediction_df$off_G_class - prediction_df$def_G_class
 
 prediction_df$LocationInd = -.89
-prediction_df$ConferenceInd = -1.33
-prediction_df$away_b2b_ind = 2.59
+prediction_df$ConferenceInd = .797
+prediction_df$away_b2b_ind = -.386
 
 colnames(prediction_df) <- gsub("%", "", colnames(prediction_df))
 
 
 predict(xgb_press_off_route, as.matrix(prediction_df))
 
-comparison_game_func <- function(threshold, year = NULL, locationinput = NULL) {
-  current_game_vector <- prediction_df
+comparison_game_func <- function(func_pred_df, threshold, year = NULL, locationinput = NULL) {
+  current_game_vector <- func_pred_df
   reference_df <- cbind(
     ppp_final_df %>% select(Team, Opp, season, Date, Location, PPP, off_home_perc_PPP:def_non_conf_away_perc_PPP),
     ppp_final_df[, which(colnames(ppp_final_df) %in% importance_matrix_press_off$Feature)]
@@ -106,8 +106,8 @@ comparison_game_func <- function(threshold, year = NULL, locationinput = NULL) {
 }
 
 
-output1 <- comparison_game_func(.54, year = NULL, locationinput = "A")
-output2 <- comparison_game_func(.76, year = NULL, locationinput = "H")
+output1 <- comparison_game_func(prediction_df, .53, year = NULL, locationinput = "A")
+output2 <- comparison_game_func(prediction_df,.73, year = NULL, locationinput = "H")
 
 nrow(output1)
 nrow(output2)

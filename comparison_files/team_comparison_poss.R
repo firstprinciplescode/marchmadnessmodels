@@ -23,9 +23,9 @@ team_comparison_poss_off <- function(team_offense, opponent_defense, ssn, locind
   prediction_df_internal$FC_class_diff <- prediction_df_internal$off_FC_class - prediction_df_internal$def_FC_class
   prediction_df_internal$G_class_diff <- prediction_df_internal$off_G_class - prediction_df_internal$def_G_class
   
-  prediction_df_internal$LocationInd <- ifelse(locind == "A", -.89, 1.11)
-  prediction_df_internal$ConferenceInd <- ifelse(confind == "N", -1.3375509, .747)
-  prediction_df_internal$away_b2b_ind <- ifelse(awayb2bind == "N", -0.386, 2.59)
+  prediction_df_internal$LocationInd <- ifelse(locind == "A", -.891, 1.122)
+  prediction_df_internal$ConferenceInd <- ifelse(confind == "N", -1.301, .763)
+  prediction_df_internal$away_b2b_ind <- ifelse(awayb2bind == "N", -.398, 2.503)
   
   off_prediction_df_internal <- prediction_df_internal[c(1:117, 235:312, 391:396, 403:411)]
   def_prediction_df_internal <- prediction_df_internal[c(118:234, 313:390, 397:411)]
@@ -174,9 +174,9 @@ team_comparison_poss_def <- function(team_defense, opponent_offense, ssn, locind
   prediction_df_internal$FC_class_diff <- prediction_df_internal$off_FC_class - prediction_df_internal$def_FC_class
   prediction_df_internal$G_class_diff <- prediction_df_internal$off_G_class - prediction_df_internal$def_G_class
   
-  prediction_df_internal$LocationInd <- ifelse(locind == "A", -.89, 1.11)
-  prediction_df_internal$ConferenceInd <- ifelse(confind == "N", -1.3375509, .747)
-  prediction_df_internal$away_b2b_ind <- ifelse(awayb2bind == "N", -0.386, 2.59)
+  prediction_df_internal$LocationInd <- ifelse(locind == "A", -.891, 1.122)
+  prediction_df_internal$ConferenceInd <- ifelse(confind == "N", -1.301, .763)
+  prediction_df_internal$away_b2b_ind <- ifelse(awayb2bind == "N", -.398, 2.503)
   
   off_prediction_df_internal <- prediction_df_internal[c(1:117, 235:312, 391:396, 403:411)]
   def_prediction_df_internal <- prediction_df_internal[c(118:234, 313:390, 397:411)]

@@ -41,8 +41,8 @@ colnames(prediction_df) <- gsub("%", "", colnames(prediction_df))
 predict(xgb_STL_perc_route, as.matrix(prediction_df))
 
 
-comparison_STL_perc_func <- function(threshold, year = NULL, locationinput = NULL) {
-  current_game_vector <- prediction_df
+comparison_STL_perc_func <- function(func_pred_df, threshold, year = NULL, locationinput = NULL) {
+  current_game_vector <- func_pred_df
   reference_df <- cbind(
     STL_perc_df %>% select(Team, Opp, season, Date, Location, STL_perc, off_home_perc_STL_perc:def_non_conf_away_perc_STL_perc),
     STL_perc_df[, which(colnames(STL_perc_df) %in% importance_matrix_STL_perc$Feature)]
@@ -85,10 +85,6 @@ comparison_STL_perc_func <- function(threshold, year = NULL, locationinput = NUL
 
 output1_STL_perc <- comparison_STL_perc_func(.37, year = NULL, locationinput = "A")
 output2_STL_perc <- comparison_STL_perc_func(.45, year = NULL, locationinput = "H")
-
-nrow(output1_STL_perc)
-nrow(output2_STL_perc)
-
 
 output1_STL_perc %>% dplyr::summarise(STL_perc = mean(STL_perc, na.rm = T),
                                       off_away_perc_STL_perc = mean(off_away_perc_STL_perc, na.rm = T),

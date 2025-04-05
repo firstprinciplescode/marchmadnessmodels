@@ -41,8 +41,8 @@ colnames(prediction_df) <- gsub("%", "", colnames(prediction_df))
 predict(xgb_FTR_route, as.matrix(prediction_df))
 
 
-comparison_FTR_func <- function(threshold, year = NULL, locationinput = NULL) {
-  current_game_vector <- prediction_df
+comparison_FTR_func <- function(func_pred_df, threshold, year = NULL, locationinput = NULL) {
+  current_game_vector <- func_pred_df
   reference_df <- cbind(
     FTR_df %>% select(Team, Opp, season, Date, Location, FTR, off_home_perc_FTR:def_non_conf_away_perc_FTR),
     FTR_df[, which(colnames(FTR_df) %in% importance_matrix_FTR$Feature)]
@@ -83,12 +83,8 @@ comparison_FTR_func <- function(threshold, year = NULL, locationinput = NULL) {
 }
 
 
-output1_FTR <- comparison_FTR_func(.45, year = NULL, locationinput = "A")
-output2_FTR <- comparison_FTR_func(.66, year = NULL, locationinput = "H")
-
-nrow(output1_FTR)
-nrow(output2_FTR)
-
+output1_FTR <- comparison_FTR_func(prediction_df, .45, year = NULL, locationinput = "A")
+output2_FTR <- comparison_FTR_func(prediction_df, .66, year = NULL, locationinput = "H")
 
 output1_FTR %>% dplyr::summarise(FTR = mean(FTR, na.rm = T),
                                       off_away_perc_FTR = mean(off_away_perc_FTR, na.rm = T),

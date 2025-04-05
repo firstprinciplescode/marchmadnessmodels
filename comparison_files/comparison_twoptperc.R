@@ -14,8 +14,8 @@ colnames(twoptperc_df) <- gsub("%", "", colnames(twoptperc_df))
 ###
 
 
-off_string = "Boise State"
-def_string = "Nebraska"
+off_string = "Nebraska"
+def_string = "Boise State"
 
 
 offense_team <- which(ppp_final_df$Team == off_string & ppp_final_df$season == 2025)[1]
@@ -34,7 +34,7 @@ prediction_df$G_class_diff <- prediction_df$off_G_class - prediction_df$def_G_cl
 
 prediction_df$LocationInd = -.89
 prediction_df$ConferenceInd = -1.33
-prediction_df$away_b2b_ind = 2.59
+prediction_df$away_b2b_ind = -.386
 
 colnames(prediction_df) <- gsub("%", "", colnames(prediction_df))
 
@@ -42,8 +42,8 @@ colnames(prediction_df) <- gsub("%", "", colnames(prediction_df))
 predict(xgb_twoptperc_route, as.matrix(prediction_df))
 
 
-comparison_twoptperc_func <- function(threshold, year = NULL, locationinput = NULL) {
-  current_game_vector <- prediction_df
+comparison_twoptperc_func <- function(func_pred_df, threshold, year = NULL, locationinput = NULL) {
+  current_game_vector <- func_pred_df
   reference_df <- cbind(
     twoptperc_df %>% select(Team, Opp, season, Date, Location, `2Pperc`, off_home_perc_2Pperc:def_non_conf_away_perc_2Pperc),
     twoptperc_df[, which(colnames(twoptperc_df) %in% importance_matrix_twoptperc$Feature)]
@@ -84,11 +84,8 @@ comparison_twoptperc_func <- function(threshold, year = NULL, locationinput = NU
 }
 
 
-output1_twopt <- comparison_twoptperc_func(.52, year = NULL, locationinput = "A")
-output2_twopt <- comparison_twoptperc_func(.68, year = NULL, locationinput = "H")
-
-nrow(output1_twopt)
-nrow(output2_twopt)
+output1_twopt <- comparison_twoptperc_func(.46, year = NULL, locationinput = "A")
+output2_twopt <- comparison_twoptperc_func(.62, year = NULL, locationinput = "H")
 
 output1_twopt %>% dplyr::summarise(`2Pperc` = mean(`2Pperc`, na.rm = T),
                                    off_away_perc_2Pperc = mean(off_away_perc_2Pperc, na.rm = T),
