@@ -1,6 +1,6 @@
 
-off_string = "Duke"
-def_string = "Houston"
+off_string = "Houston"
+def_string = "Florida"
 
 
 offense_team <- which(ppp_final_df$Team == off_string & ppp_final_df$season == 2025)[1]
@@ -19,7 +19,7 @@ prediction_df$G_class_diff <- prediction_df$off_G_class - prediction_df$def_G_cl
 
 prediction_df$LocationInd = -.891
 prediction_df$ConferenceInd = -1.301
-prediction_df$away_b2b_ind = -.398
+prediction_df$away_b2b_ind = 2.503
 
 colnames(prediction_df) <- gsub("%", "", colnames(prediction_df))
 
@@ -45,7 +45,7 @@ prediction_df_2$G_class_diff <- prediction_df_2$off_G_class - prediction_df_2$de
 
 prediction_df_2$LocationInd = -.891
 prediction_df_2$ConferenceInd = -1.301
-prediction_df_2$away_b2b_ind = -.398
+prediction_df_2$away_b2b_ind = 2.503
 
 colnames(prediction_df_2) <- gsub("%", "", colnames(prediction_df_2))
 
@@ -101,8 +101,8 @@ rownames(comp_team_two_vec) <- c("OFF", "DEF")
 ####
 
 
-output1_ppp <- comparison_game_func(prediction_df, .56, year = NULL, locationinput = "A")
-output2_ppp <- comparison_game_func(prediction_df, .79, year = NULL, locationinput = "H")
+output1_ppp <- comparison_game_func(prediction_df, .53, year = NULL, locationinput = "A")
+output2_ppp <- comparison_game_func(prediction_df, .75, year = NULL, locationinput = "H")
 
 output1_ppp %>% filter((Team != off_string | Opp != def_string) & season != 2025) %>% 
   dplyr::summarise(PPP = mean(PPP, na.rm = T),
@@ -143,8 +143,8 @@ output2_ppp %>% dplyr::summarise(PPP = mean(PPP, na.rm = T),
 
 
 
-output1_ppp_2 <- comparison_game_func(prediction_df_2, .56, year = NULL, locationinput = "A")
-output2_ppp_2 <- comparison_game_func(prediction_df_2, .79, year = NULL, locationinput = "H")
+output1_ppp_2 <- comparison_game_func(prediction_df_2, .53, year = NULL, locationinput = "A")
+output2_ppp_2 <- comparison_game_func(prediction_df_2, .76, year = NULL, locationinput = "H")
 
 output1_ppp_2 %>% filter((Team != def_string | Opp != off_string) & season != 2025) %>% 
   dplyr::summarise(PPP = mean(PPP, na.rm = T),
@@ -191,7 +191,7 @@ rownames(ppp_result_df) <- c(off_string, def_string)
 ####
 
 
-output1_poss <- comparison_poss_func(prediction_df, .41, year = NULL, locationinput = "A")
+output1_poss <- comparison_poss_func(prediction_df, .4, year = NULL, locationinput = "A")
 output2_poss <- comparison_poss_func(prediction_df, .51, year = NULL, locationinput = "H")
 
 output1_poss %>% filter((Team != off_string | Opp != def_string) & season != 2025) %>% 
@@ -233,8 +233,8 @@ output2_poss %>% dplyr::summarise(poss = mean(poss, na.rm = T),
 
 
 
-output1_poss_2 <- comparison_poss_func(prediction_df_2, .42, year = NULL, locationinput = "A")
-output2_poss_2 <- comparison_poss_func(prediction_df_2, .52, year = NULL, locationinput = "H")
+output1_poss_2 <- comparison_poss_func(prediction_df_2, .39, year = NULL, locationinput = "A")
+output2_poss_2 <- comparison_poss_func(prediction_df_2, .49, year = NULL, locationinput = "H")
 
 output1_poss_2 %>% filter((Team != def_string | Opp != off_string) & season != 2025) %>% 
   dplyr::summarise(poss = mean(poss, na.rm = T),
@@ -281,8 +281,8 @@ rownames(poss_result_df) <- c(off_string, def_string)
 ####
 
 
-output1_twopt <- comparison_twoptperc_func(prediction_df, .55, year = NULL, locationinput = "A")
-output2_twopt <- comparison_twoptperc_func(prediction_df, .75, year = NULL, locationinput = "H")
+output1_twopt <- comparison_twoptperc_func(prediction_df, .52, year = NULL, locationinput = "A")
+output2_twopt <- comparison_twoptperc_func(prediction_df, .68, year = NULL, locationinput = "H")
 
 
 output1_twopt %>% filter((Team != off_string | Opp != def_string) & season != 2025) %>% 
@@ -324,8 +324,8 @@ output2_twopt %>% dplyr::summarise(`2Pperc` = mean(`2Pperc`, na.rm = T),
 
 
 
-output1_twopt_2 <- comparison_twoptperc_func(prediction_df_2, .6, year = NULL, locationinput = "A")
-output2_twopt_2 <- comparison_twoptperc_func(prediction_df_2, .78, year = NULL, locationinput = "H")
+output1_twopt_2 <- comparison_twoptperc_func(prediction_df_2, .5, year = NULL, locationinput = "A")
+output2_twopt_2 <- comparison_twoptperc_func(prediction_df_2, .67, year = NULL, locationinput = "H")
 
 
 output1_twopt_2 %>% filter((Team != def_string | Opp != off_string) & season != 2025) %>% 
@@ -350,7 +350,7 @@ output2_twopt_2 %>%
                    n = n())
 
 
-c <- cbind(output1_twopt_2 %>% dplyr::summarise(`2Pperc` = mean(`2Pperc`, na.rm = T),
+team_two_2P <- cbind(output1_twopt_2 %>% dplyr::summarise(`2Pperc` = mean(`2Pperc`, na.rm = T),
                                    off_away_perc_2Pperc = mean(off_away_perc_2Pperc, na.rm = T),
                                    off_conf_away_perc_2Pperc = mean(off_conf_away_perc_2Pperc, na.rm = T),
                                    off_non_conf_away_perc_2Pperc = mean(off_non_conf_away_perc_2Pperc, na.rm = T),
@@ -375,8 +375,8 @@ rownames(`2P_result_df`) <- c(off_string, def_string)
 ####
 
 
-output1_threept <- comparison_threeptperc_func(prediction_df, .53, year = NULL, locationinput = "A")
-output2_threept <- comparison_threeptperc_func(prediction_df, .86, year = NULL, locationinput = "H")
+output1_threept <- comparison_threeptperc_func(prediction_df, .55, year = NULL, locationinput = "A")
+output2_threept <- comparison_threeptperc_func(prediction_df, .9, year = NULL, locationinput = "H")
 
 output1_threept %>%
   filter(Team != off_string & Opp != def_string) %>%
@@ -418,8 +418,8 @@ output2_threept %>% dplyr::summarise(threePperc = mean(`3P`, na.rm = T),
 
 
 
-output1_threept_2 <- comparison_threeptperc_func(prediction_df_2, .51, year = NULL, locationinput = "A")
-output2_threept_2 <- comparison_threeptperc_func(prediction_df_2, .9, year = NULL, locationinput = "H")
+output1_threept_2 <- comparison_threeptperc_func(prediction_df_2, .43, year = NULL, locationinput = "A")
+output2_threept_2 <- comparison_threeptperc_func(prediction_df_2, .8, year = NULL, locationinput = "H")
 
 output1_threept_2 %>%
   filter(Team != def_string & Opp != off_string) %>%
@@ -468,8 +468,8 @@ rownames(`3P_result_df`) <- c(off_string, def_string)
 ####
 
 
-output1_STL_perc <- comparison_STL_perc_func(prediction_df, .43, year = NULL, locationinput = "A")
-output2_STL_perc <- comparison_STL_perc_func(prediction_df, .49, year = NULL, locationinput = "H")
+output1_STL_perc <- comparison_STL_perc_func(prediction_df, .39, year = NULL, locationinput = "A")
+output2_STL_perc <- comparison_STL_perc_func(prediction_df, .51, year = NULL, locationinput = "H")
 
 output1_STL_perc %>%
   filter(Team != off_string & Opp != def_string) %>%
@@ -510,8 +510,8 @@ output2_STL_perc %>% dplyr::summarise(STL_perc = mean(STL_perc, na.rm = T),
 
 
 
-output1_STL_perc_2 <- comparison_STL_perc_func(prediction_df_2, .42, year = NULL, locationinput = "A")
-output2_STL_perc_2 <- comparison_STL_perc_func(prediction_df_2, .49, year = NULL, locationinput = "H")
+output1_STL_perc_2 <- comparison_STL_perc_func(prediction_df_2, .4, year = NULL, locationinput = "A")
+output2_STL_perc_2 <- comparison_STL_perc_func(prediction_df_2, .5, year = NULL, locationinput = "H")
 
 output1_STL_perc_2 %>%
   filter(Team != def_string & Opp != off_string) %>%
@@ -560,8 +560,8 @@ rownames(STL_result_df) <- c(off_string, def_string)
 ####
 
 
-output1_tov_perc <- comparison_tov_perc_func(prediction_df, .31, year = NULL, locationinput = "A")
-output2_tov_perc <- comparison_tov_perc_func(prediction_df, .48, year = NULL, locationinput = "H")
+output1_tov_perc <- comparison_tov_perc_func(prediction_df, .35, year = NULL, locationinput = "A")
+output2_tov_perc <- comparison_tov_perc_func(prediction_df, .52, year = NULL, locationinput = "H")
 
 output1_tov_perc %>%
   filter(Team != off_string & Opp != def_string) %>%
@@ -603,8 +603,8 @@ output2_tov_perc %>% dplyr::summarise(TOV_perc = mean(TOV_perc, na.rm = T),
 
 
 
-output1_tov_perc_2 <- comparison_tov_perc_func(prediction_df_2, .31, year = NULL, locationinput = "A")
-output2_tov_perc_2 <- comparison_tov_perc_func(prediction_df_2, .47, year = NULL, locationinput = "H")
+output1_tov_perc_2 <- comparison_tov_perc_func(prediction_df_2, .34, year = NULL, locationinput = "A")
+output2_tov_perc_2 <- comparison_tov_perc_func(prediction_df_2, .51, year = NULL, locationinput = "H")
 
 output1_tov_perc_2 %>%
   filter(Team != def_string & Opp != off_string) %>%
@@ -655,8 +655,8 @@ rownames(TOV_result_df) <- c(off_string, def_string)
 
 
 
-output1_ORB_perc <- comparison_ORB_perc_func(prediction_df, .54, year = NULL, locationinput = "A")
-output2_ORB_perc <- comparison_ORB_perc_func(prediction_df, .66, year = NULL, locationinput = "H")
+output1_ORB_perc <- comparison_ORB_perc_func(prediction_df, .45, year = NULL, locationinput = "A")
+output2_ORB_perc <- comparison_ORB_perc_func(prediction_df, .55, year = NULL, locationinput = "H")
 
 output1_ORB_perc %>%
   filter(Team != off_string & Opp != def_string) %>%
@@ -696,8 +696,8 @@ output2_ORB_perc %>% dplyr::summarise(ORB_perc = mean(ORB_perc, na.rm = T),
                                       def_non_conf_home_perc_ORB_perc  = mean(def_non_conf_home_perc_ORB_perc , na.rm = T)))
 
 
-output1_ORB_perc_2 <- comparison_ORB_perc_func(prediction_df_2, .49, year = NULL, locationinput = "A")
-output2_ORB_perc_2 <- comparison_ORB_perc_func(prediction_df_2, .64, year = NULL, locationinput = "H")
+output1_ORB_perc_2 <- comparison_ORB_perc_func(prediction_df_2, .57, year = NULL, locationinput = "A")
+output2_ORB_perc_2 <- comparison_ORB_perc_func(prediction_df_2, .67, year = NULL, locationinput = "H")
 
 output1_ORB_perc_2 %>%
   filter(Team != def_string & Opp != off_string) %>%
@@ -747,8 +747,8 @@ rownames(ORB_result_df) <- c(off_string, def_string)
 
 
 
-output1_FTR <- comparison_FTR_func(prediction_df, .32, year = NULL, locationinput = "A")
-output2_FTR <- comparison_FTR_func(prediction_df, .66, year = NULL, locationinput = "H")
+output1_FTR <- comparison_FTR_func(prediction_df, .44, year = NULL, locationinput = "A")
+output2_FTR <- comparison_FTR_func(prediction_df, .64, year = NULL, locationinput = "H")
 
 output1_FTR %>%
   filter(Team != off_string & Opp != def_string) %>%
@@ -788,8 +788,8 @@ output2_FTR %>% dplyr::summarise(FTR = mean(FTR, na.rm = T),
                                  def_non_conf_home_perc_FTR  = mean(def_non_conf_home_perc_FTR , na.rm = T)))
 
 
-output1_FTR_2 <- comparison_FTR_func(prediction_df_2, .36, year = NULL, locationinput = "A")
-output2_FTR_2 <- comparison_FTR_func(prediction_df_2, .61, year = NULL, locationinput = "H")
+output1_FTR_2 <- comparison_FTR_func(prediction_df_2, .49, year = NULL, locationinput = "A")
+output2_FTR_2 <- comparison_FTR_func(prediction_df_2, .69, year = NULL, locationinput = "H")
 
 output1_FTR_2 %>%
   filter(Team != off_string & Opp != def_string) %>%
@@ -831,3 +831,75 @@ output2_FTR_2 %>% dplyr::summarise(FTR = mean(FTR, na.rm = T),
 FTR_result_df <- as.data.frame(rbind(team_one_FTR, team_two_FTR))
 rownames(FTR_result_df) <- c(off_string, def_string)
 
+
+
+####
+####
+####
+
+
+
+reg_vec # 2 rows
+
+comp_team_one_vec # 2 rows
+
+comp_team_two_vec # 2 rows
+
+ppp_result_df # 2 rows
+
+`2P_result_df` # 2 rows
+
+`3P_result_df` # 2 rows
+
+STL_result_df # 2 rows
+
+TOV_result_df # 2 rows
+
+FTR_result_df # 2 rows
+
+ORB_result_df # 2 rows
+
+poss_result_df # 2 rows
+
+#
+
+
+# Create workbook and add worksheet
+wb <- createWorkbook()
+sheet_name <- substr(paste0("GamePred - ", def_string, " vs ", off_string), 1, 31)
+addWorksheet(wb, sheet_name)
+
+# Put your data frames (and vectors) into a list in the desired order
+df_list <- list(
+  "XGBoost"           = reg_vec,
+  "Houston - Comp" = comp_team_one_vec,
+  "Florida - Comp" = comp_team_two_vec,
+  "PPP"     = ppp_result_df,
+  "2P"      = `2P_result_df`,
+  "3P"      = `3P_result_df`,
+  "STL"     = STL_result_df,
+  "TOV"     = TOV_result_df,
+  "FTR"     = FTR_result_df,
+  "ORB"     = ORB_result_df,
+  "POSS"    = poss_result_df
+)
+
+# Each block gets 3 rows (1 row for the name, 2 rows for data)
+# and add a gap row between blocks: total 4 rows per block.
+num_blocks <- length(df_list)
+start_rows <- seq(1, by = 4, length.out = num_blocks)
+
+for(i in seq_along(df_list)) {
+  # Write the data frame name in the first row of the block
+  writeData(wb, sheet = sheet_name,
+            x = data.frame(Category = names(df_list)[i]),
+            startRow = start_rows[i], colNames = FALSE, rowNames = TRUE)
+  
+  # Write the actual data frame, keeping row names, starting two rows below
+  writeData(wb, sheet = sheet_name,
+            x = as.data.frame(df_list[[i]]),
+            startRow = start_rows[i] + 2, colNames = TRUE, rowNames = TRUE)
+}
+
+# Save workbook (set the path as needed)
+saveWorkbook(wb, file.path("C:/Users/AndLi/Downloads/The Big March One", paste0(sheet_name, ".xlsx")), overwrite = TRUE)
