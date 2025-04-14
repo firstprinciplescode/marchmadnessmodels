@@ -22,11 +22,11 @@ marchmadnessmodels/
 Ingest + Clean Data: Scrapers pull raw data → cleaned & stored in Excel
 
 Feature Generation: From Excel, generate features like:
-Box score stats
-Team minutes continuity
-Player size metrics
-Conference strength
-Neutral/away/home context
+ - Box score stats
+ - Team minutes continuity
+ - Player size metrics
+ - Conference strength
+ - Neutral/away/home context
 
 Train Models:
 
@@ -36,22 +36,13 @@ Outputs: feature weights → how important each stat is in driving outcomes
 
 Find Similar Games:
 
-Given a matchup, find historical games with similar team profiles
+Given a matchup, find historical games with similar team profiles, weight those games by similarity and ML-learned importance, to predict outcomes using those weighted comps.
 
-Weight those games by similarity and ML-learned importance
-
-Predict:
-
-Use those weighted comps to simulate outcomes and output win probabilities
-
-📈 Example Use Cases
-Predict NCAA Tournament matchups
-
-Model NIT, CBI, or other postseason brackets
-
-Compare mid-major vs power conference dynamics historically
-
-Evaluate how style and roster construction travel across tournament formats
+# 📈 Example Use Cases
+- Predict NCAA Tournament matchups
+- Model NIT, CBI, or other postseason brackets
+- Compare mid-major vs power conference dynamics historically
+- Evaluate how style and roster construction travel across tournament formats
 
 
 Built by someone who should probably be asleep right now
