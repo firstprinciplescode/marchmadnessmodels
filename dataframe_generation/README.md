@@ -22,15 +22,10 @@ marchmadnessmodels/
 Ingest + Clean Data: Scrapers pull raw data → cleaned & stored in Excel
 
 Feature Generation: From Excel, generate features like:
-
 Box score stats
-
 Team minutes continuity
-
 Player size metrics
-
 Conference strength
-
 Neutral/away/home context
 
 Train Models:
