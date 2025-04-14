@@ -17,25 +17,19 @@ marchmadnessmodels
 - comparison_files/       # Functions to search for similar historical games
 - results_tracker/        # Stores results + outcome evaluations
 
-🔍 Methodology
-Ingest + Clean Data: Scrapers pull raw data → cleaned & stored in Excel
-
-Feature Generation: From Excel, generate features like:
- - Box score stats
- - Team minutes continuity
- - Player size metrics
- - Conference strength
- - Neutral/away/home context
-
-Train Models:
-
-XGBoost models trained on historic data
-
-Outputs: feature weights → how important each stat is in driving outcomes
-
-Find Similar Games:
-
-Given a matchup, find historical games with similar team profiles, weight those games by similarity and ML-learned importance, to predict outcomes using those weighted comps.
+# 🔍 Methodology
+- Ingest + Clean Data: Scrapers pull raw data → cleaned & stored in Excel
+- Feature Generation: From Excel, generate features like:
+  - Box score stats
+  - Team minutes continuity
+  - Player size metrics
+  - Conference strength
+  - Neutral/away/home context
+- Train Models:
+  - XGBoost models trained on historic data
+  - Outputs: feature weights → how important each stat is in driving outcomes
+-Find Similar Games:
+  - Given a matchup, find historical games with similar team profiles, weight those games by similarity and ML-learned importance, to predict outcomes using those weighted comps.
 
 # 📈 Example Use Cases
 - Predict NCAA Tournament matchups
